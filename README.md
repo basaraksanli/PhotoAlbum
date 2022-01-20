@@ -1,7 +1,7 @@
 # Photo Album
 
 
-The Photo Album is a demo application which provides three screens. This app retrieves data from the https://jsonplaceholder.typicode.com and shows user's albums, pictures, and picture details.
+The Photo Album is a demo application which provides three screens. This app retrieves data from the https://jsonplaceholder.typicode.com and shows the user's albums, pictures, and picture details.
 
 ## Project Structure
 
