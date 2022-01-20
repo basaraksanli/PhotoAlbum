@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PhotoAlbum">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".feature_album.presentation.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.PhotoAlbum.NoActionBar">
