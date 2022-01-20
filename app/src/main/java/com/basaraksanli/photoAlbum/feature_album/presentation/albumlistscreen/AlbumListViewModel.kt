@@ -1,5 +1,6 @@
 package com.basaraksanli.photoAlbum.feature_album.presentation.albumlistscreen
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,6 +11,7 @@ import com.basaraksanli.photoAlbum.feature_album.util.ApiResult
 import com.basaraksanli.photoAlbum.feature_album.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,23 +19,25 @@ class AlbumListViewModel @Inject constructor(
     private val useCases: AlbumUseCases,
 ) : ViewModel() {
 
-    var userList = mutableStateOf<List<UserListItem>>(listOf())
-    var albumList = mutableStateOf<Map<Int, List<AlbumListItem>>>(mapOf())
-    var thumbnailList = mutableStateOf<List<List<Int>>>(mutableListOf())
-    var loadError = mutableStateOf("")
-    var isUserLoading = mutableStateOf(false)
-    var isAlbumLoading = mutableStateOf(false)
-
-
+    private val _state = mutableStateOf<AlbumListState>(AlbumListState.AlbumListScreenLoading)
+    var state: State<AlbumListState> = _state
 
     init {
-        loadUserList()
-        loadAlbumList()
+        onEvent(AlbumListEvent.LoadUsers)
+    }
+    fun onEvent(event: AlbumListEvent) {
+        when (event) {
+            is AlbumListEvent.LoadUsers -> {
+                loadUserList()
+            }
+            is AlbumListEvent.LoadAlbums -> {
+                loadAlbumList(event.userList)
+            }
+        }
     }
 
     private fun loadUserList() {
         viewModelScope.launch {
-            isUserLoading.value = true
             when (val result = useCases.getUserList()) {
                 is ApiResult.Success -> {
                     val userEntries = result.data!!.mapIndexed { _, entry ->
@@ -48,41 +52,49 @@ class AlbumListViewModel @Inject constructor(
                             website = entry.website
                         )
                     }
-                    loadError.value = ""
-                    isUserLoading.value = false
-                    userList.value = userEntries
+                    _state.value = AlbumListState.AlbumListScreenUsersLoaded(userList = userEntries)
+                    onEvent(AlbumListEvent.LoadAlbums(userEntries))
                 }
                 is ApiResult.Error -> {
-                    loadError.value = result.message!!
-                    isUserLoading.value = false
+                    if (result.message != null) {
+                        _state.value = AlbumListState.AlbumListScreenNetworkError(result.message)
+                        Timber.e(Throwable(result.message))
+                    } else {
+                        _state.value =
+                            AlbumListState.AlbumListScreenNetworkError("Unknown Error has been occurred.")
+                        Timber.e(Throwable("Unknown Error has been occurred."))
+                    }
                 }
             }
         }
     }
 
-    private fun loadAlbumList() {
+    private fun loadAlbumList(userList: List<UserListItem>) {
         viewModelScope.launch {
-            isAlbumLoading.value = true
             when (val result = useCases.getAlbumList()) {
                 is ApiResult.Success -> {
                     val tempThumbnailList: ArrayList<List<Int>> = arrayListOf()
                     val albumEntries = result.data!!.mapIndexed { _, entry ->
                         AlbumListItem(entry.id, entry.title, entry.userId)
                     }
-                    loadError.value = ""
-                    isAlbumLoading.value = false
-                    albumList.value += albumEntries.groupBy {
+                    val tempAlbum = albumEntries.groupBy {
                         it.userId
                     }
-                    for (i: Int in 0..albumList.value.size) {
+
+                    for (i: Int in 0..tempAlbum.size) {
                         tempThumbnailList.add(Constants.THUMBNAIL_IMAGE_LIST.shuffled())
                     }
-                    thumbnailList.value = tempThumbnailList
-
+                    _state.value = AlbumListState.AlbumListScreenLoaded(userList = userList,tempAlbum, tempThumbnailList)
                 }
                 is ApiResult.Error -> {
-                    loadError.value = result.message!!
-                    isAlbumLoading.value = false
+                    if (result.message != null) {
+                        _state.value = AlbumListState.AlbumListScreenNetworkError(result.message)
+                        Timber.e(Throwable(result.message))
+                    } else {
+                        _state.value =
+                            AlbumListState.AlbumListScreenNetworkError("Unknown Error has been occurred.")
+                        Timber.e(Throwable("Unknown Error has been occurred."))
+                    }
                 }
             }
         }
