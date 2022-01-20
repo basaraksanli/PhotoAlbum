@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -23,9 +24,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import com.basaraksanli.photoAlbum.R
+import com.basaraksanli.photoAlbum.core.presentation.components.ShimmerAnimation
 import com.basaraksanli.photoAlbum.feature_album.domain.model.PhotoListItem
 import com.basaraksanli.photoAlbum.feature_album.presentation.photolistscreen.PhotoListViewModel
-import com.basaraksanli.photoAlbum.util.ShimmerAnimation
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -79,7 +81,7 @@ fun PhotoEntry(
                 .height(40.dp), contentAlignment = Alignment.TopCenter
         ) {
             Text(
-                text = "Title: " + entry.title,
+                text = stringResource(R.string.title) + entry.title,
                 fontSize = 12.sp,
                 softWrap = true,
                 overflow = TextOverflow.Ellipsis,

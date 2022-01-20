@@ -57,8 +57,8 @@ class PhotoListViewModel @Inject constructor(
                         Timber.e(Throwable(result.message))
                     } else {
                         _state.value =
-                            PhotoListScreenState.PhotoListNetworkError("Unknown Error has been occurred.")
-                        Timber.e(Throwable("Unknown Error has been occurred."))
+                            PhotoListScreenState.PhotoListNetworkError("Unknown Error has occurred.")
+                        Timber.e(Throwable("Unknown Error has occurred."))
                     }
                 }
             }

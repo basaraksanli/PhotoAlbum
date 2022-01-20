@@ -16,5 +16,8 @@ object Constants {
         R.drawable.thumbnail9,
         R.drawable.thumbnail10,
     )
+    const val SHIMMER_DURATION = 1200
+    const val INITIAL_SHIMMER = 0f
+    const val TARGET_SHIMMER = 1000f
 
 }

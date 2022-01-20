@@ -5,12 +5,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.basaraksanli.photoAlbum.R
 
 @Composable
 fun AlbumInfoCard(userName: String, albumTitle: String) {
@@ -20,7 +22,7 @@ fun AlbumInfoCard(userName: String, albumTitle: String) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Album Info",
+            text = stringResource(R.string.album_info),
             style = TextStyle(fontWeight = FontWeight.Bold),
             fontSize = 24.sp,
             modifier = Modifier
@@ -36,9 +38,9 @@ fun AlbumInfoCard(userName: String, albumTitle: String) {
                     .padding(start = 20.dp),
                 verticalArrangement = Arrangement.Center
             ) {
-                Text("User Name:", maxLines = 1, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.user_name), maxLines = 1, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(10.dp))
-                Text("Album Title:", maxLines = 1, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.album_title), maxLines = 1, fontWeight = FontWeight.Bold)
             }
             Column(
                 Modifier

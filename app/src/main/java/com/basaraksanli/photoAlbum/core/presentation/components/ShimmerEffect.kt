@@ -1,4 +1,4 @@
-package com.basaraksanli.photoAlbum.util
+package com.basaraksanli.photoAlbum.core.presentation.components
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
+import com.basaraksanli.photoAlbum.feature_album.util.Constants
 import com.basaraksanli.photoAlbum.ui.theme.ShimmerColorShades
 
 @Composable
@@ -50,13 +51,13 @@ fun ShimmerAnimation() {
          initial Values 0F means it
          starts from 0 position
         */
-        initialValue = 0f,
-        targetValue = 1000f,
+        initialValue = Constants.INITIAL_SHIMMER,
+        targetValue = Constants.TARGET_SHIMMER,
         animationSpec = infiniteRepeatable(
 
 
             // Tween Animates between values over specified [durationMillis]
-            tween(durationMillis = 1200, easing = FastOutSlowInEasing),
+            tween(durationMillis = Constants.SHIMMER_DURATION, easing = FastOutSlowInEasing),
             RepeatMode.Reverse
         )
     )

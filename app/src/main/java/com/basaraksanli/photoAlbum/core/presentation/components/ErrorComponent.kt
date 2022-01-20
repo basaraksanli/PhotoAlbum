@@ -6,6 +6,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.basaraksanli.photoAlbum.R
 
 @Composable
 fun ErrorComponent() {
@@ -13,6 +15,6 @@ fun ErrorComponent() {
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        Text(text = "En error has occurred")
+        Text(text = stringResource(R.string.error_string))
     }
 }
