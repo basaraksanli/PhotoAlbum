@@ -8,7 +8,6 @@ import com.basaraksanli.photoAlbum.feature_album.domain.repository.AlbumReposito
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
-@ActivityScoped
 class AlbumRepositoryImpl @Inject constructor(
     private val api: AlbumApi) : AlbumRepository{
     override suspend fun getUserList(): UserList {
