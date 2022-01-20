@@ -5,7 +5,7 @@ The Photo Album is a demo application which provides three screens. This app ret
 
 ## Video
 
-https://user-images.githubusercontent.com/4333134/150412072-78999d8e-fde4-4247-a83b-941b9447f970.mp4
+https://user-images.githubusercontent.com/4333134/150413048-63da2dae-555f-46e6-8a05-9483cb689fda.mp4
 
 ## Project Structure
 
