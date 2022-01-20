@@ -11,7 +11,7 @@ import javax.inject.Inject
 @ActivityScoped
 class AlbumRepositoryImpl @Inject constructor(
     private val api: AlbumApi) : AlbumRepository{
-    override suspend fun gelUserList(): UserList {
+    override suspend fun getUserList(): UserList {
         return api.getUserList()
     }
 

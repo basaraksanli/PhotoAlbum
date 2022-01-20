@@ -9,7 +9,7 @@ class GetUserList @Inject constructor(
     private val repository: AlbumRepository){
     suspend operator fun invoke(): ApiResult<UserList> {
         val response = try {
-            repository.gelUserList()
+            repository.getUserList()
         } catch (e: Exception) {
             return ApiResult.Error("An unknown error occurred.")
         }

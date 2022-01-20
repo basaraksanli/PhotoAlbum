@@ -6,7 +6,7 @@ import com.basaraksanli.photoAlbum.feature_album.domain.model.UserList
 
 
 interface AlbumRepository {
-    suspend fun gelUserList(): UserList
+    suspend fun getUserList(): UserList
 
     suspend fun getAlbumList(): AlbumList
 
