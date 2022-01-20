@@ -1,8 +1,13 @@
 package com.basaraksanli.photoAlbum.di
 
-import com.basaraksanli.photoAlbum.data.remote.AlbumApi
-import com.basaraksanli.photoAlbum.repository.AlbumRepository
-import com.basaraksanli.photoAlbum.util.Constants
+import com.basaraksanli.photoAlbum.feature_album.data.remote.AlbumApi
+import com.basaraksanli.photoAlbum.feature_album.data.repository.AlbumRepositoryImpl
+import com.basaraksanli.photoAlbum.feature_album.domain.repository.AlbumRepository
+import com.basaraksanli.photoAlbum.feature_album.domain.use_case.AlbumUseCases
+import com.basaraksanli.photoAlbum.feature_album.domain.use_case.GetAlbumList
+import com.basaraksanli.photoAlbum.feature_album.domain.use_case.GetPhotoList
+import com.basaraksanli.photoAlbum.feature_album.domain.use_case.GetUserList
+import com.basaraksanli.photoAlbum.feature_album.util.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,15 +24,25 @@ object AppModule {
     @Provides
     fun provideAlbumRepository(
         api: AlbumApi
-    ) = AlbumRepository(api)
+    ) : AlbumRepository = AlbumRepositoryImpl(api)
 
     @Singleton
     @Provides
-    fun provideAlbumApi() : AlbumApi{
+    fun provideAlbumApi() : AlbumApi {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(Constants.BASE_URL)
             .build()
             .create(AlbumApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAlbumUseCases(repository: AlbumRepository): AlbumUseCases{
+        return AlbumUseCases(
+            getAlbumList = GetAlbumList(repository),
+            getPhotoList = GetPhotoList(repository),
+            getUserList = GetUserList(repository),
+        )
     }
 }
