@@ -5,12 +5,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.basaraksanli.photoAlbum.R
 import com.basaraksanli.photoAlbum.feature_album.domain.model.UserListItem
 
 @Composable
@@ -21,7 +23,7 @@ fun UserCard(user: UserListItem) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "User",
+            text = stringResource(R.string.user),
             style = TextStyle(fontWeight = FontWeight.Bold),
             fontSize = 24.sp,
             modifier = Modifier
@@ -36,11 +38,11 @@ fun UserCard(user: UserListItem) {
                     .padding(start = 20.dp),
                 verticalArrangement = Arrangement.Center
             ) {
-                Text("Name:", fontWeight = FontWeight.Bold)
-                Text("Email:", fontWeight = FontWeight.Bold)
-                Text("Username:", fontWeight = FontWeight.Bold)
-                Text("Website:", fontWeight = FontWeight.Bold)
-                Text("Company:", fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.name), fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.email), fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.username), fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.website), fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.company), fontWeight = FontWeight.Bold)
             }
             Column(
                 Modifier

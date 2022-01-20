@@ -14,5 +14,4 @@ sealed class ApiResult<T>(val data: T? = null, val message: String? = null) {
         data,
         message
     )
-    class Loading<T>: ApiResult<T>()
 }

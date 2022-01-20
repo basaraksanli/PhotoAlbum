@@ -61,8 +61,8 @@ class AlbumListViewModel @Inject constructor(
                         Timber.e(Throwable(result.message))
                     } else {
                         _state.value =
-                            AlbumListState.AlbumListScreenNetworkError("Unknown Error has been occurred.")
-                        Timber.e(Throwable("Unknown Error has been occurred."))
+                            AlbumListState.AlbumListScreenNetworkError("Unknown Error has occurred.")
+                        Timber.e(Throwable("Unknown Error has occurred."))
                     }
                 }
             }
@@ -92,8 +92,8 @@ class AlbumListViewModel @Inject constructor(
                         Timber.e(Throwable(result.message))
                     } else {
                         _state.value =
-                            AlbumListState.AlbumListScreenNetworkError("Unknown Error has been occurred.")
-                        Timber.e(Throwable("Unknown Error has been occurred."))
+                            AlbumListState.AlbumListScreenNetworkError("Unknown Error has occurred.")
+                        Timber.e(Throwable("Unknown Error has occurred."))
                     }
                 }
             }

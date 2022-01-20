@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">PhotoAlbum</string>
+    <string name="error_string">En error has occurred</string>
+    <string name="albums">Albums</string>
+    <string name="user">User</string>
+    <string name="name">Name:</string>
+    <string name="email">Email:</string>
+    <string name="username">Username:</string>
+    <string name="website">Website:</string>
+    <string name="company">Company:</string>
+    <string name="album_title">Album Title:</string>
+    <string name="photo_title">Photo Title:</string>
+    <string name="album_info">Album Info</string>
+    <string name="user_name">User Name:</string>
+    <string name="title">Title: </string>
+    <string name="albums_without_punc">Albums</string>
 </resources>

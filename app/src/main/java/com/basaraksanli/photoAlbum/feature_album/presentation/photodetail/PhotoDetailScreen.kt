@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -18,9 +19,10 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
+import com.basaraksanli.photoAlbum.R
 import com.basaraksanli.photoAlbum.core.presentation.components.ErrorComponent
 import com.basaraksanli.photoAlbum.core.presentation.components.FullScreenProgressBar
-import com.basaraksanli.photoAlbum.util.ShimmerAnimation
+import com.basaraksanli.photoAlbum.core.presentation.components.ShimmerAnimation
 
 @ExperimentalCoilApi
 @Composable
@@ -73,12 +75,12 @@ fun PhotoDetailScreen(
                     }
                     Column(modifier = Modifier.padding(20.dp)) {
                         Row(Modifier.padding(bottom = 20.dp)) {
-                            Text("Album Title:", fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.album_title), fontWeight = FontWeight.Bold)
                             Spacer(modifier = Modifier.width(20.dp))
                             Text(state.albumTitle, softWrap = true)
                         }
                         Row {
-                            Text("Photo Title:", fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.photo_title), fontWeight = FontWeight.Bold)
                             Spacer(modifier = Modifier.width(20.dp))
                             Text(state.photoTitle, softWrap = true)
                         }
