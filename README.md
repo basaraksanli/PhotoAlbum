@@ -3,6 +3,10 @@
 
 The Photo Album is a demo application which provides three screens. This app retrieves data from the https://jsonplaceholder.typicode.com and shows the user's albums, pictures, and picture details.
 
+## Video
+
+https://user-images.githubusercontent.com/4333134/150412072-78999d8e-fde4-4247-a83b-941b9447f970.mp4
+
 ## Project Structure
 
 The PhotoAlbum is designed with MVVM design pattern and Clean Architecture.
