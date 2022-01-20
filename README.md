@@ -9,14 +9,14 @@ The PhotoAlbum is designed with MVVM design pattern and Clean Architecture.
 
 ## Libraries
 
-Jetpack Compose
-Hilt
-Retrofit
-Coil
-Coroutines
-Timber
-Pager
-Lifecycle
+- Jetpack Compose
+- Hilt
+- Retrofit
+- Coil
+- Coroutines
+- Timber
+- Pager
+- Lifecycle
 
 ## Contributors
 
