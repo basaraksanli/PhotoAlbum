@@ -11,6 +11,7 @@ import com.basaraksanli.photoAlbum.feature_album.util.ApiResult
 import com.basaraksanli.photoAlbum.feature_album.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,23 +19,19 @@ class AlbumListViewModel @Inject constructor(
     private val useCases: AlbumUseCases,
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(AlbumListState())
-    var state : State<AlbumListState> =_state
-
+    private val _state = mutableStateOf<AlbumListState>(AlbumListState.AlbumListScreenLoading)
+    var state: State<AlbumListState> = _state
 
     init {
-        loadUserList()
-        loadAlbumList()
+        onEvent(AlbumListEvent.LoadUsers)
     }
-
-    fun onEvent(event: AlbumListEvent){
-        when(event){
-            is AlbumListEvent.LoadAlbums ->{
-                loadAlbumList()
+    fun onEvent(event: AlbumListEvent) {
+        when (event) {
+            is AlbumListEvent.LoadUsers -> {
+                loadUserList()
             }
-            is AlbumListEvent.LoadUsers ->{
-                if(_state.value.loadError != "" && !_state.value.isUsersLoading)
-                    loadAlbumList()
+            is AlbumListEvent.LoadAlbums -> {
+                loadAlbumList(event.userList)
             }
         }
     }
@@ -55,24 +52,24 @@ class AlbumListViewModel @Inject constructor(
                             website = entry.website
                         )
                     }
-                    _state.value = state.value.copy(
-                        loadError = "",
-                        isUsersLoading = false,
-                        userList = userEntries
-                    )
+                    _state.value = AlbumListState.AlbumListScreenUsersLoaded(userList = userEntries)
+                    onEvent(AlbumListEvent.LoadAlbums(userEntries))
                 }
                 is ApiResult.Error -> {
-                    _state.value = state.value.copy(
-                        loadError = result.message!!,
-                        isUsersLoading = false,
-                        isAlbumsLoading = false,
-                    )
+                    if (result.message != null) {
+                        _state.value = AlbumListState.AlbumListScreenNetworkError(result.message)
+                        Timber.e(Throwable(result.message))
+                    } else {
+                        _state.value =
+                            AlbumListState.AlbumListScreenNetworkError("Unknown Error has been occurred.")
+                        Timber.e(Throwable("Unknown Error has been occurred."))
+                    }
                 }
             }
         }
     }
 
-    private fun loadAlbumList() {
+    private fun loadAlbumList(userList: List<UserListItem>) {
         viewModelScope.launch {
             when (val result = useCases.getAlbumList()) {
                 is ApiResult.Success -> {
@@ -80,27 +77,24 @@ class AlbumListViewModel @Inject constructor(
                     val albumEntries = result.data!!.mapIndexed { _, entry ->
                         AlbumListItem(entry.id, entry.title, entry.userId)
                     }
-                    val tempAlbum =  albumEntries.groupBy {
+                    val tempAlbum = albumEntries.groupBy {
                         it.userId
                     }
 
                     for (i: Int in 0..tempAlbum.size) {
                         tempThumbnailList.add(Constants.THUMBNAIL_IMAGE_LIST.shuffled())
                     }
-
-                    _state.value = state.value.copy(
-                        loadError = "",
-                        isAlbumsLoading = false,
-                        albumList = tempAlbum,
-                        thumbnailList = tempThumbnailList
-                    )
+                    _state.value = AlbumListState.AlbumListScreenLoaded(userList = userList,tempAlbum, tempThumbnailList)
                 }
                 is ApiResult.Error -> {
-                    _state.value = state.value.copy(
-                        loadError = result.message!!,
-                        isUsersLoading = false,
-                        isAlbumsLoading = false,
-                    )
+                    if (result.message != null) {
+                        _state.value = AlbumListState.AlbumListScreenNetworkError(result.message)
+                        Timber.e(Throwable(result.message))
+                    } else {
+                        _state.value =
+                            AlbumListState.AlbumListScreenNetworkError("Unknown Error has been occurred.")
+                        Timber.e(Throwable("Unknown Error has been occurred."))
+                    }
                 }
             }
         }

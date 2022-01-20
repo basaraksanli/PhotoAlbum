@@ -2,42 +2,40 @@ package com.basaraksanli.photoAlbum.util
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.unit.dp
 import com.basaraksanli.photoAlbum.ui.theme.ShimmerColorShades
 
 @Composable
 private fun ShimmerItem(
     brush: Brush,
-    modifier: Modifier
 ) {
     // Column composable containing spacer shaped like a rectangle,
     // set the [background]'s [brush] with the brush receiving from [ShimmerAnimation]
     // Composable which is the Animation you are gonna create.
-    Column(modifier = modifier) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f)
+    ) {
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()
-                .size(250.dp)
-                .background(brush = brush)
-        )
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(30.dp)
-                .padding(vertical = 8.dp)
+                .aspectRatio(1f)
                 .background(brush = brush)
         )
     }
 }
 
 @Composable
-fun ShimmerAnimation(modifier: Modifier = Modifier) {
+fun ShimmerAnimation() {
 
     /*
      Create InfiniteTransition
@@ -75,5 +73,5 @@ fun ShimmerAnimation(modifier: Modifier = Modifier) {
         end = Offset(translateAnim, translateAnim)
     )
 
-    ShimmerItem(brush = brush, modifier)
+    ShimmerItem(brush = brush)
 }
