@@ -21,11 +21,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.basaraksanli.photoAlbum.feature_album.domain.model.AlbumListItem
+import com.basaraksanli.photoAlbum.feature_album.domain.model.Album
 
 @Composable
 fun AlbumEntry(
-    entry: AlbumListItem,
+    entry: Album,
     userName: String,
     navController: NavController,
     imageId: Int

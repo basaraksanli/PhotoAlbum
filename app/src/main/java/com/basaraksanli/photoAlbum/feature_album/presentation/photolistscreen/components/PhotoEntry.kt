@@ -26,14 +26,14 @@ import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.basaraksanli.photoAlbum.R
 import com.basaraksanli.photoAlbum.core.presentation.components.ShimmerAnimation
-import com.basaraksanli.photoAlbum.feature_album.domain.model.PhotoListItem
+import com.basaraksanli.photoAlbum.feature_album.domain.model.Photo
 import com.basaraksanli.photoAlbum.feature_album.presentation.photolistscreen.PhotoListViewModel
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
 @Composable
 fun PhotoEntry(
-    entry: PhotoListItem,
+    entry: Photo,
     navController: NavController,
     viewModel: PhotoListViewModel = hiltViewModel()
 ) {

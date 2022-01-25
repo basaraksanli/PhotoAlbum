@@ -1,6 +1,6 @@
 package com.basaraksanli.photoAlbum.feature_album.domain.model
 
-data class AlbumListItem(
+data class Album(
     val id: Int,
     val title: String,
     val userId: Int

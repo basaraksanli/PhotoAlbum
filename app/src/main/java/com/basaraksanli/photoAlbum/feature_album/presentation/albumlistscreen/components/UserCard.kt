@@ -13,10 +13,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.basaraksanli.photoAlbum.R
-import com.basaraksanli.photoAlbum.feature_album.domain.model.UserListItem
+import com.basaraksanli.photoAlbum.feature_album.domain.model.User
 
 @Composable
-fun UserCard(user: UserListItem) {
+fun UserCard(user: User) {
     Column(
         modifier = Modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.Center,

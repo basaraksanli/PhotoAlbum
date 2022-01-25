@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.basaraksanli.photoAlbum.R
-import com.basaraksanli.photoAlbum.feature_album.domain.model.PhotoListItem
+import com.basaraksanli.photoAlbum.feature_album.domain.model.Photo
 import com.basaraksanli.photoAlbum.feature_album.presentation.photolistscreen.PhotoListScreenState
 import com.basaraksanli.photoAlbum.feature_album.presentation.photolistscreen.PhotoListViewModel
 
@@ -28,7 +28,7 @@ fun PhotoListWidget(
 
     if (state is PhotoListScreenState.PhotoListScreenLoaded) {
 
-        val photoItemPairs = arrayListOf<Pair<PhotoListItem, PhotoListItem?>>()
+        val photoItemPairs = arrayListOf<Pair<Photo, Photo?>>()
 
         for (i: Int in state.photoList.indices) {
             if (i % 2 == 0) {

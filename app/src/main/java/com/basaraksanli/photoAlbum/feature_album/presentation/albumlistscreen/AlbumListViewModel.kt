@@ -4,8 +4,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.basaraksanli.photoAlbum.feature_album.domain.model.AlbumListItem
-import com.basaraksanli.photoAlbum.feature_album.domain.model.UserListItem
+import com.basaraksanli.photoAlbum.feature_album.domain.model.Album
+import com.basaraksanli.photoAlbum.feature_album.domain.model.User
 import com.basaraksanli.photoAlbum.feature_album.domain.use_case.AlbumUseCases
 import com.basaraksanli.photoAlbum.feature_album.util.ApiResult
 import com.basaraksanli.photoAlbum.feature_album.util.Constants
@@ -41,7 +41,7 @@ class AlbumListViewModel @Inject constructor(
             when (val result = useCases.getUserList()) {
                 is ApiResult.Success -> {
                     val userEntries = result.data!!.mapIndexed { _, entry ->
-                        UserListItem(
+                        User(
                             address = entry.address,
                             company = entry.company,
                             email = entry.email,
@@ -69,13 +69,13 @@ class AlbumListViewModel @Inject constructor(
         }
     }
 
-    private fun loadAlbumList(userList: List<UserListItem>) {
+    private fun loadAlbumList(userList: List<User>) {
         viewModelScope.launch {
             when (val result = useCases.getAlbumList()) {
                 is ApiResult.Success -> {
                     val tempThumbnailList: ArrayList<List<Int>> = arrayListOf()
                     val albumEntries = result.data!!.mapIndexed { _, entry ->
-                        AlbumListItem(entry.id, entry.title, entry.userId)
+                        Album(entry.id, entry.title, entry.userId)
                     }
                     val tempAlbum = albumEntries.groupBy {
                         it.userId

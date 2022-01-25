@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.basaraksanli.photoAlbum.feature_album.domain.model.PhotoListItem
+import com.basaraksanli.photoAlbum.feature_album.domain.model.Photo
 import com.basaraksanli.photoAlbum.feature_album.domain.use_case.AlbumUseCases
 import com.basaraksanli.photoAlbum.feature_album.util.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,7 +41,7 @@ class PhotoListViewModel @Inject constructor(
             when (val result = useCases.getPhotoList(albumId = albumId)) {
                 is ApiResult.Success ->{
                     val photoEntries = result.data!!.mapIndexed { _, entry ->
-                        PhotoListItem(
+                        Photo(
                             albumId = entry.albumId,
                             id = entry.id,
                             thumbnailUrl = entry.thumbnailUrl,
