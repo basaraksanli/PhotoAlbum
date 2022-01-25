@@ -15,7 +15,6 @@ data class UserDto(
 ) {
     fun toUser(): User {
         return User(
-            address = address.toAddress(),
             company = company.toCompany(),
             email = email,
             id = id,

@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.basaraksanli.photoAlbum.feature_album.domain.model.Photo
 import com.basaraksanli.photoAlbum.feature_album.domain.use_case.AlbumUseCases
 import com.basaraksanli.photoAlbum.feature_album.util.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,16 +39,7 @@ class PhotoListViewModel @Inject constructor(
         viewModelScope.launch {
             when (val result = useCases.getPhotoList(albumId = albumId)) {
                 is ApiResult.Success ->{
-                    val photoEntries = result.data!!.mapIndexed { _, entry ->
-                        Photo(
-                            albumId = entry.albumId,
-                            id = entry.id,
-                            thumbnailUrl = entry.thumbnailUrl,
-                            title = entry.title,
-                            url = entry.url,
-                        )
-                    }
-                    _state.value = PhotoListScreenState.PhotoListScreenLoaded(photoList = photoEntries)
+                    _state.value = PhotoListScreenState.PhotoListScreenLoaded(photoList = result.data!!)
                 }
                 is ApiResult.Error -> {
                     if (result.message != null) {

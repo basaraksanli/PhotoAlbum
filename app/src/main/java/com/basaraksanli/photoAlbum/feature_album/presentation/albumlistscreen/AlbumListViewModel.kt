@@ -4,7 +4,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.basaraksanli.photoAlbum.feature_album.domain.model.Album
 import com.basaraksanli.photoAlbum.feature_album.domain.model.User
 import com.basaraksanli.photoAlbum.feature_album.domain.use_case.AlbumUseCases
 import com.basaraksanli.photoAlbum.feature_album.util.ApiResult
@@ -40,20 +39,8 @@ class AlbumListViewModel @Inject constructor(
         viewModelScope.launch {
             when (val result = useCases.getUserList()) {
                 is ApiResult.Success -> {
-                    val userEntries = result.data!!.mapIndexed { _, entry ->
-                        User(
-                            address = entry.address,
-                            company = entry.company,
-                            email = entry.email,
-                            id = entry.id,
-                            name = entry.name,
-                            phone = entry.phone,
-                            username = entry.username,
-                            website = entry.website
-                        )
-                    }
-                    _state.value = AlbumListState.AlbumListScreenUsersLoaded(userList = userEntries)
-                    onEvent(AlbumListEvent.LoadAlbums(userEntries))
+                    _state.value = AlbumListState.AlbumListScreenUsersLoaded(userList = result.data!!)
+                    onEvent(AlbumListEvent.LoadAlbums(result.data))
                 }
                 is ApiResult.Error -> {
                     if (result.message != null) {
@@ -74,10 +61,8 @@ class AlbumListViewModel @Inject constructor(
             when (val result = useCases.getAlbumList()) {
                 is ApiResult.Success -> {
                     val tempThumbnailList: ArrayList<List<Int>> = arrayListOf()
-                    val albumEntries = result.data!!.mapIndexed { _, entry ->
-                        Album(entry.id, entry.title, entry.userId)
-                    }
-                    val tempAlbum = albumEntries.groupBy {
+
+                    val tempAlbum = result.data!!.groupBy {
                         it.userId
                     }
 
