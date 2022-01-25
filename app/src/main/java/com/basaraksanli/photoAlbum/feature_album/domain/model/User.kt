@@ -2,7 +2,7 @@ package com.basaraksanli.photoAlbum.feature_album.domain.model
 
 
 data class User(
-    val company: Company,
+    val companyName: String,
     val email: String,
     val id: Int,
     val name: String,

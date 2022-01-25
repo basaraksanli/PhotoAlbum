@@ -53,7 +53,7 @@ fun UserCard(user: User) {
                 Text(text = user.email, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 Text(text = user.username, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 Text(text = user.website, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                Text(text = user.company.name, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(text = user.companyName, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
     }
