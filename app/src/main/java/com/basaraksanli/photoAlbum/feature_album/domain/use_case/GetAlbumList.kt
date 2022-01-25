@@ -1,6 +1,6 @@
 package com.basaraksanli.photoAlbum.feature_album.domain.use_case
 
-import com.basaraksanli.photoAlbum.feature_album.domain.model.AlbumList
+import com.basaraksanli.photoAlbum.feature_album.domain.model.Album
 import com.basaraksanli.photoAlbum.feature_album.domain.repository.AlbumRepository
 import com.basaraksanli.photoAlbum.feature_album.util.ApiResult
 import javax.inject.Inject
@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetAlbumList  @Inject constructor(
     private val repository: AlbumRepository
 ){
-    suspend  operator fun invoke(): ApiResult<AlbumList> {
+    suspend  operator fun invoke(): ApiResult<List<Album>> {
         val response = try {
             repository.getAlbumList()
         } catch (e: Exception) {

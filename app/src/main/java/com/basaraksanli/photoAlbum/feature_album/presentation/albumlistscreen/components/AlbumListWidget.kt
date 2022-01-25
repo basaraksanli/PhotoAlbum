@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.basaraksanli.photoAlbum.R
-import com.basaraksanli.photoAlbum.feature_album.domain.model.AlbumListItem
+import com.basaraksanli.photoAlbum.feature_album.domain.model.Album
 import com.basaraksanli.photoAlbum.feature_album.presentation.albumlistscreen.AlbumListState
 import com.basaraksanli.photoAlbum.feature_album.presentation.albumlistscreen.AlbumListViewModel
 
@@ -28,7 +28,7 @@ fun AlbumListWidget(
 ) {
     val state = viewModel.state.value
     if (state is AlbumListState.AlbumListScreenLoaded) {
-        val albumItemPairs = arrayListOf<Pair<AlbumListItem, AlbumListItem?>>()
+        val albumItemPairs = arrayListOf<Pair<Album, Album?>>()
 
 
         for (i: Int in 0 until state.albumList[userId]?.size!!) {
