@@ -7,7 +7,7 @@ data class CompanyDto(
     val catchPhrase: String,
     val name: String
 ){
-    fun toCompany() : Company{
+    fun toCompany() : Company {
         return Company(
             bs= bs,
             catchPhrase = catchPhrase,
